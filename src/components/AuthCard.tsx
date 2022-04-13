@@ -1,11 +1,11 @@
 import React from "react"
 
 type Props = {
-    logo: React.ReactNode;
+    logo?: React.ReactNode;
     children?: React.ReactNode;
 }
 
-const AuthCard: React.FC<Props> = (props) => (
+const AuthCard: React.VFC<Props> = (props) => (
     <div className="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
         <div>{props.logo}</div>
 
