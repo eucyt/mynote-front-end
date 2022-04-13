@@ -3,7 +3,7 @@ import axios from '@/lib/axios'
 import {Dispatch, SetStateAction, useEffect} from 'react'
 import {useRouter} from 'next/router'
 
-export const useAuth = (middleware: string | null, redirectIfAuthenticated: string | null) => {
+export const useAuth = (middleware: string = 'auth', redirectIfAuthenticated: string = '/') => {
     const router = useRouter()
 
     const {data: user, error, mutate} = useSWR('/api/user', () =>
@@ -34,7 +34,7 @@ export const useAuth = (middleware: string | null, redirectIfAuthenticated: stri
             })
     }
 
-    const login = async (setErrors: Dispatch<SetStateAction<any[]>>, setStatus: Dispatch<SetStateAction<unknown>>, ...props: Array<string>): Promise<void> => {
+    const login = async (setErrors: Dispatch<SetStateAction<any[]>>, setStatus: Dispatch<SetStateAction<string | null>>, ...props: Array<string>): Promise<void> => {
         await csrf()
 
         setErrors([])
@@ -50,7 +50,7 @@ export const useAuth = (middleware: string | null, redirectIfAuthenticated: stri
             })
     }
 
-    const forgotPassword = async (setErrors: Dispatch<SetStateAction<any[]>>, setStatus: Dispatch<SetStateAction<unknown>>, email: string): Promise<void> => {
+    const forgotPassword = async (setErrors: Dispatch<SetStateAction<any[]>>, setStatus: Dispatch<SetStateAction<string | null>>, email: string): Promise<void> => {
         await csrf()
 
         setErrors([])
@@ -66,7 +66,7 @@ export const useAuth = (middleware: string | null, redirectIfAuthenticated: stri
             })
     }
 
-    const resetPassword = async (setErrors: Dispatch<SetStateAction<any[]>>, setStatus: Dispatch<SetStateAction<unknown>>, ...props: Array<string>): Promise<void> => {
+    const resetPassword = async (setErrors: Dispatch<SetStateAction<any[]>>, setStatus: Dispatch<SetStateAction<string | null>>, ...props: Array<string>): Promise<void> => {
         await csrf()
 
         setErrors([])
@@ -82,7 +82,7 @@ export const useAuth = (middleware: string | null, redirectIfAuthenticated: stri
             })
     }
 
-    const resendEmailVerification = (setStatus: Dispatch<SetStateAction<unknown>>): void => {
+    const resendEmailVerification = (setStatus: Dispatch<SetStateAction<string | null>>): void => {
         axios
             .post('/email/verification-notification')
             .then(response => setStatus(response.data.status))
