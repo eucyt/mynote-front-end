@@ -3,6 +3,7 @@ import React, {ChangeEventHandler} from "react"
 type Props = {
     id?: string;
     type?: string;
+    name?: string;
     value?: string;
     className?: string;
     onChange?: ChangeEventHandler<HTMLInputElement>;
@@ -15,6 +16,7 @@ type Props = {
 const Input: React.VFC<Props> = ({
                                      id,
                                      type,
+                                     name,
                                      value,
                                      className,
                                      onChange,
@@ -24,7 +26,7 @@ const Input: React.VFC<Props> = ({
                                      disabled = false,
                                  }) => (
     <input
-        id={id} type={type} value={value} onChange={onChange} autoComplete={autoComplete}
+        id={id} type={type} name={name} value={value} onChange={onChange} autoComplete={autoComplete}
         required={required} autoFocus={autoFocus} disabled={disabled}
         className={`${className} rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50`}
     />

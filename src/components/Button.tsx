@@ -1,7 +1,7 @@
 import React from "react"
 
 type Props = {
-    type?: "button" | "reset" | "submit" | undefined;
+    type?: "button" | "reset" | "submit";
     className?: string;
     children: React.ReactNode;
 }

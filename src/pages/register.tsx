@@ -1,6 +1,5 @@
 import ApplicationLogo from '@/components/ApplicationLogo'
 import AuthCard from '@/components/AuthCard'
-import AuthSessionStatus from '@/components/AuthSessionStatus'
 import AuthValidationErrors from '@/components/AuthValidationErrors'
 import Button from '@/components/Button'
 import GuestLayout from '@/components/Layouts/GuestLayout'
@@ -8,31 +7,21 @@ import Input from '@/components/Input'
 import Label from '@/components/Label'
 import Link from 'next/link'
 import {useAuth} from '@/hooks/auth'
-import React, {useEffect, useState} from 'react'
-import {useRouter} from 'next/router'
+import React, {useState} from 'react'
 
-const Login: React.VFC = () => {
-    const router = useRouter()
+const Register: React.VFC = () => {
+    const {register} = useAuth({middleware: 'guest'})
 
-    const {login} = useAuth({middleware: 'guest'})
-
+    const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [password_confirmation, setPasswordConfirmation] = useState('')
     const [errors, setErrors] = useState<unknown[]>([])
-    const [status, setStatus] = useState<string | null>(null)
 
-    useEffect(() => {
-        if (router.query.reset && router.query.reset.length > 0 && errors.length === 0) {
-            setStatus(window.atob(router.query.reset as string))
-        } else {
-            setStatus(null)
-        }
-    })
-
-    const submitForm = async (event: { preventDefault: () => void }) => {
+    const submitForm = (event: { preventDefault: () => void }) => {
         event.preventDefault()
 
-        await login({setErrors, setStatus, email, password})
+        register({setErrors, name, email, password, password_confirmation})
     }
 
     return (
@@ -46,15 +35,27 @@ const Login: React.VFC = () => {
                     </Link>
                 }>
 
-                {/* Session Status */}
-                <AuthSessionStatus className="mb-4" status={status}/>
-
                 {/* Validation Errors */}
                 <AuthValidationErrors className="mb-4" errors={errors}/>
 
                 <form onSubmit={submitForm}>
-                    {/* Email Address */}
+                    {/* Name */}
                     <div>
+                        <Label htmlFor="name">Name</Label>
+
+                        <Input
+                            id="name"
+                            type="text"
+                            value={name}
+                            className="block mt-1 w-full"
+                            onChange={event => setName(event.target.value)}
+                            required
+                            autoFocus
+                        />
+                    </div>
+
+                    {/* Email Address */}
+                    <div className="mt-4">
                         <Label htmlFor="email">Email</Label>
 
                         <Input
@@ -64,7 +65,6 @@ const Login: React.VFC = () => {
                             className="block mt-1 w-full"
                             onChange={event => setEmail(event.target.value)}
                             required
-                            autoFocus
                         />
                     </div>
 
@@ -79,36 +79,36 @@ const Login: React.VFC = () => {
                             className="block mt-1 w-full"
                             onChange={event => setPassword(event.target.value)}
                             required
-                            autoComplete="current-password"
+                            autoComplete="new-password"
                         />
                     </div>
 
-                    {/* Remember Me */}
-                    <div className="block mt-4">
-                        <label
-                            htmlFor="remember_me"
-                            className="inline-flex items-center">
-                            <input
-                                id="remember_me"
-                                type="checkbox"
-                                name="remember"
-                                className="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                            />
+                    {/* Confirm Password */}
+                    <div className="mt-4">
+                        <Label htmlFor="password_confirmation">
+                            Confirm Password
+                        </Label>
 
-                            <span className="ml-2 text-sm text-gray-600">
-                                Remember me
-                            </span>
-                        </label>
+                        <Input
+                            id="password_confirmation"
+                            type="password"
+                            value={password_confirmation}
+                            className="block mt-1 w-full"
+                            onChange={event =>
+                                setPasswordConfirmation(event.target.value)
+                            }
+                            required
+                        />
                     </div>
 
                     <div className="flex items-center justify-end mt-4">
-                        <Link href="/forgot-password">
+                        <Link href="/login">
                             <a className="underline text-sm text-gray-600 hover:text-gray-900">
-                                Forgot your password?
+                                Already registered?
                             </a>
                         </Link>
 
-                        <Button className="ml-3">Login</Button>
+                        <Button className="ml-4">Register</Button>
                     </div>
                 </form>
             </AuthCard>
@@ -116,4 +116,4 @@ const Login: React.VFC = () => {
     )
 }
 
-export default Login
+export default Register
