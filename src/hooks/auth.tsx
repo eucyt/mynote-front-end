@@ -8,7 +8,7 @@ type Props = {
     redirectIfAuthenticated?: string;
 }
 
-export const useAuth = ({middleware = "auth", redirectIfAuthenticated = "/"}: Props) => {
+export const useAuth = ({middleware, redirectIfAuthenticated = "/"}: Props = {}) => {
     const router = useRouter()
 
     const {data: user, error, mutate} = useSWR('/api/user', () =>
