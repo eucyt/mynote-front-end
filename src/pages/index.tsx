@@ -6,12 +6,12 @@ const Index = () => {
         <AppLayout
             header={
                 <h2 className="font-semibold text-xl text-gray-800 leading-tight">
-                    Home
+                    Notes
                 </h2>
             }>
 
             <Head>
-                <title>MyNote - Home</title>
+                <title>MyNote - Notes</title>
             </Head>
 
             <div className="py-12">
