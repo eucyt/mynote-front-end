@@ -9,8 +9,18 @@ export const notesApi = () => {
 
     const csrf = (): Promise<void> => axios.get('/sanctum/csrf-cookie')
 
+    const createNote = async () => {
+        // TODO: csrf works?
+        await csrf()
+        await axios
+            .post('/api/notes')
+            .then(res => setNote(res.data))
+            .catch(error => {
+            })
+    }
+
     const fetchNote = async (noteId: number, router: NextRouter) => {
-        axios
+        await axios
             .get('/api/notes/' + noteId)
             .then(res => setNote(res.data.data))
             .catch(error => {
@@ -24,7 +34,7 @@ export const notesApi = () => {
     const updateNote = async (noteRequest: NoteRequest) => {
         // TODO: csrf works?
         await csrf()
-        axios
+        await axios
             .put('/api/notes/' + noteRequest.id, noteRequest)
             .then(
                 // TODO
@@ -37,7 +47,7 @@ export const notesApi = () => {
     const deleteNote = async (noteId: number) => {
         // TODO: csrf works?
         await csrf()
-        axios
+        await axios
             .delete('/api/notes/' + noteId)
             .then(
                 // TODO
@@ -48,6 +58,7 @@ export const notesApi = () => {
     }
 
     return {
+        createNote,
         fetchNote,
         updateNote,
         deleteNote,

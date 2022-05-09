@@ -44,11 +44,11 @@ const Note = () => {
                     <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                         <div className="p-6 bg-white border-b border-gray-200">
                             <div data-color-mode="dark">
-                                <textarea value={note?.title} onChange={(e) => {
+                                <textarea value={note?.title ?? ""} onChange={(e) => {
                                     note && setNote({...note, title: e.target.value})
                                 }}
                                 />
-                                <textarea value={note?.body} onChange={(e) => {
+                                <textarea value={note?.body ?? ""} onChange={(e) => {
                                     note && setNote({...note, body: e.target.value})
                                 }}
                                 />
