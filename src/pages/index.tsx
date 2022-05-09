@@ -3,12 +3,7 @@ import Head from 'next/head'
 
 const Index = () => {
     return (
-        <AppLayout
-            header={
-                <h2 className="font-semibold text-xl text-gray-800 leading-tight">
-                    Notes
-                </h2>
-            }>
+        <AppLayout>
 
             <Head>
                 <title>MyNote - Notes</title>
