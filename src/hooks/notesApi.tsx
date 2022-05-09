@@ -1,12 +1,14 @@
 import axios from '@/lib/axios';
 import {useState} from "react";
-import {NoteItem} from "@/types/NoteItem";
+import {NoteItem, NoteRequest} from "@/types/NoteItem";
 
 export const notesApi = () => {
     // const [notesApi, setNotes] = useState<Array<NoteItem>>([]);
     const [note, setNote] = useState<NoteItem>();
 
-    const fetchNote = async (noteId: number) => {
+    const csrf = (): Promise<void> => axios.get('/sanctum/csrf-cookie')
+
+    const fetchNote = (noteId: number) => {
         axios
             .get('/api/notes/' + noteId)
             .then(res => setNote(res.data.data))
@@ -15,8 +17,22 @@ export const notesApi = () => {
             })
     }
 
+    const updateNote = async (noteRequest: NoteRequest) => {
+        await csrf()
+        axios
+            .put('/api/notes/' + noteRequest.id, noteRequest)
+            .then(
+                // TODO
+            )
+            .catch(error => {
+                // TODO
+            })
+    }
+
     return {
         fetchNote,
-        note
+        updateNote,
+        note,
+        setNote
     };
 };
