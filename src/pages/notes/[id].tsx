@@ -7,10 +7,10 @@ import {notesApi} from "@/hooks/notesApi";
 
 const Note = () => {
     const router = useRouter()
-    const {fetchNote, updateNote, note, setNote} = notesApi()
+    const {fetchNote, updateNote, deleteNote, note, setNote} = notesApi()
     useEffect(() => {
             if (router.isReady) {
-                fetchNote(Number(router.query.id))
+                fetchNote(Number(router.query.id), router).then()
             }
         }, [router.query],
     )
@@ -30,6 +30,15 @@ const Note = () => {
                 <title>MyNote - Notes</title>
             </Head>
 
+            <div>
+                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                        onClick={() => {
+                            deleteNote(Number(router.query.id)).then(() => {
+                                router.push('/')
+                            })
+                        }}>delete
+                </button>
+            </div>
             <div className="py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
