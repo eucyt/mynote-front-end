@@ -26,22 +26,28 @@ const Index = () => {
                 <title>MyNote - Notes</title>
             </Head>
 
-            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+
+            <div
+                className="m-2 sm:m-6 max-w-7xl p-6 overflow-hidden shadow-sm rounded-lg bg-white border border-gray-200">
+                <button
+                    className="p-3 m-6 rounded transition duration-500 hover:opacity-50 border border-gray-200 bg-gray-100"
                     onClick={() => {
                         createNote().then(() => {
                         })
                     }}>create new note
-            </button>
-
-            <div className="py-12">
-                <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                    <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                        <div className="p-6 bg-white border-b border-gray-200">
-                            {notes.map((note) => {
-                                return <li>{note.title}</li>
-                            })}
-                        </div>
-                    </div>
+                </button>
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 mt-6">
+                    {notes.map((note) => {
+                        return (
+                            <div
+                                className="p-7 mx-6 mb-6 rounded overflow-hidden shadow-lg transition duration-500 hover:opacity-50 cursor-pointer border border-gray-200 h-32"
+                                onClick={() => {
+                                    router.push('/notes/' + note.id)
+                                }}>
+                                <p className="overflow-hidden h-full line-clamp-3">{note.title}</p>
+                            </div>
+                        )
+                    })}
                 </div>
             </div>
         </AppLayout>
