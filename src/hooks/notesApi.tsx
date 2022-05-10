@@ -4,10 +4,19 @@ import {NoteItem, NoteRequest} from "@/types/NoteItem";
 import {NextRouter} from "next/dist/client/router";
 
 export const notesApi = () => {
-    // const [notesApi, setNotes] = useState<Array<NoteItem>>([]);
+    const [notes, setNotes] = useState<Array<NoteItem>>([]);
     const [note, setNote] = useState<NoteItem>();
 
     const csrf = (): Promise<void> => axios.get('/sanctum/csrf-cookie')
+
+
+    const fetchNotes = () => {
+        axios
+            .get('/api/notes')
+            .then(res => setNotes(res.data.data))
+            .catch(error => {
+            })
+    }
 
     const createNote = async () => {
         // TODO: csrf works?
@@ -60,9 +69,11 @@ export const notesApi = () => {
     return {
         createNote,
         fetchNote,
+        fetchNotes,
         updateNote,
         deleteNote,
         note,
+        notes,
         setNote
     };
 };

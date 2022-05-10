@@ -5,13 +5,16 @@ import {notesApi} from "@/hooks/notesApi";
 import {useRouter} from "next/router";
 
 const Index = () => {
-    const {createNote, note} = notesApi()
+    const {fetchNotes, createNote, note, notes} = notesApi()
     const router = useRouter()
+
+    useEffect(() => {
+        fetchNotes()
+    }, [])
 
     // redirect new note page if new note is created
     useEffect(() => {
         if (note) {
-            console.log(note)
             router.push('/notes/' + note?.id)
         }
     }, [note])
@@ -34,7 +37,9 @@ const Index = () => {
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                         <div className="p-6 bg-white border-b border-gray-200">
-                            You're logged in!
+                            {notes.map((note) => {
+                                return <li>{note.title}</li>
+                            })}
                         </div>
                     </div>
                 </div>
