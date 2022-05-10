@@ -3,7 +3,6 @@ import '@toast-ui/editor/dist/toastui-editor.css';
 import {Editor} from "@toast-ui/react-editor";
 
 type Props = {
-    ref: React.RefObject<Editor>
     initialValue: string
     onChange: (value: string) => void
 }
