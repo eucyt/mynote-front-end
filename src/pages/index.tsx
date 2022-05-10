@@ -3,10 +3,10 @@ import Head from 'next/head'
 import React, {useEffect} from "react";
 import {notesApi} from "@/hooks/notesApi";
 import {useRouter} from "next/router";
+import Link from 'next/link'
 
 const Index = () => {
     const {fetchNotes, createNote, note, notes} = notesApi()
-    const router = useRouter()
 
     useEffect(() => {
         fetchNotes()
@@ -15,7 +15,7 @@ const Index = () => {
     // redirect new note page if new note is created
     useEffect(() => {
         if (note) {
-            router.push('/notes/' + note?.id)
+            useRouter().push('/notes/' + note?.id)
         }
     }, [note])
 
@@ -39,13 +39,12 @@ const Index = () => {
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 mt-6">
                     {notes.map((note) => {
                         return (
-                            <div
-                                className="p-7 mx-6 mb-6 rounded overflow-hidden shadow-lg transition duration-500 hover:opacity-50 cursor-pointer border border-gray-200 h-32"
-                                onClick={() => {
-                                    router.push('/notes/' + note.id)
-                                }}>
-                                <p className="overflow-hidden h-full line-clamp-3">{note.title}</p>
-                            </div>
+                            <Link href={'/notes/' + note.id}>
+                                <div
+                                    className="p-7 mx-6 mb-6 rounded overflow-hidden shadow-lg transition duration-500 hover:opacity-50 cursor-pointer border border-gray-200 h-32">
+                                    <p className="overflow-hidden h-full line-clamp-3">{note.title}</p>
+                                </div>
+                            </Link>
                         )
                     })}
                 </div>
