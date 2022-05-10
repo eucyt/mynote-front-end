@@ -3,11 +3,16 @@ import Head from 'next/head'
 import React, {useEffect} from "react";
 import {useRouter} from "next/router";
 import {notesApi} from "@/hooks/notesApi";
+import '@toast-ui/editor/dist/toastui-editor.css';
+import {Editor} from "@toast-ui/react-editor";
+import MarkdownEditor from "@/components/MarkdownEditor";
 
 
 const Note = () => {
     const router = useRouter()
     const {fetchNote, updateNote, deleteNote, note, setNote} = notesApi()
+    const editorRef = React.useRef<Editor>(null);
+
     useEffect(() => {
             if (router.isReady) {
                 fetchNote(Number(router.query.id), router).then()
@@ -18,11 +23,11 @@ const Note = () => {
     useEffect(() => {
         if (note) {
             updateNote(note).then(() => {
+                // TODO: display message "updated"
                 console.log("updated")
             })
         }
     }, [note])
-
 
     return (
         <AppLayout>
@@ -39,23 +44,18 @@ const Note = () => {
                         }}>delete
                 </button>
             </div>
-            <div className="py-12">
-                <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                    <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                        <div className="p-6 bg-white border-b border-gray-200">
-                            <div data-color-mode="dark">
-                                <textarea value={note?.title ?? ""} onChange={(e) => {
-                                    note && setNote({...note, title: e.target.value})
-                                }}
-                                />
-                                <textarea value={note?.body ?? ""} onChange={(e) => {
-                                    note && setNote({...note, body: e.target.value})
-                                }}
-                                />
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div
+                className="m-2 sm:m-6 max-w-7xl p-6 overflow-hidden shadow-sm rounded-lg bg-white border border-gray-200">
+                <textarea value={note?.title ?? ""} onChange={(e) => {
+                    note && setNote({...note, title: e.target.value})
+                }}
+                />
+                
+                <MarkdownEditor
+                    ref={editorRef}
+                    initialValue={note?.body ?? ""}
+                    onChange={(body) => note && setNote({...note, body: body})}
+                />
             </div>
         </AppLayout>
     )
