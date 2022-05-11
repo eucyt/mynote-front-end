@@ -20,7 +20,7 @@ const ForgotPassword: React.VFC = () => {
     const submitForm = (event: { preventDefault: () => void }) => {
         event.preventDefault()
 
-        forgotPassword(setErrors, setStatus, email)
+        forgotPassword({setErrors, setStatus, email})
     }
 
     return (

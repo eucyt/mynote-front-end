@@ -33,7 +33,7 @@ const Dropdown: React.VFC<Props> = ({
 
     return (
         <Menu as="div" className="relative">
-            <Menu.Button as={React.Fragment}>{trigger}</Menu.Button>
+            <Menu.Button>{trigger}</Menu.Button>
             <div className={`absolute z-50 mt-2 ${width} rounded-md shadow-lg ${alignmentClasses}`}>
                 <Menu.Items
                     className={`rounded-md focus:outline-none ring-1 ring-black ring-opacity-5 ${contentClasses}`}>

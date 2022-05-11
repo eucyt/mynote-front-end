@@ -1,4 +1,4 @@
-import React, {memo} from "react";
+import React from "react";
 import '@toast-ui/editor/dist/toastui-editor.css';
 import {Editor} from "@toast-ui/react-editor";
 
@@ -9,7 +9,7 @@ type Props = {
 }
 
 
-const MarkdownEditor: React.VFC<Props> = memo((props) => {
+const MarkdownEditor: React.VFC<Props> = (props) => {
     const editorRef = React.useRef<Editor>(null)
 
     return (
@@ -32,6 +32,6 @@ const MarkdownEditor: React.VFC<Props> = memo((props) => {
             }
         />
     )
-})
+}
 
 export default MarkdownEditor
