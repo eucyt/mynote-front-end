@@ -37,6 +37,7 @@ const Index = () => {
                         })
                     }}>create new note
                 </button>
+                
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 mt-6">
                     {notes.map((note) => {
                         return (
