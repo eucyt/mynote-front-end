@@ -11,12 +11,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Create dot env file
-      - shell: bash
-        run: |
-          touch .env
-          echo "NEXT_PUBLIC_BACKEND_URL=${{ secrets.NEXT_PUBLIC_BACKEND_URL }}" >> .env
-
       - name: setup node
         uses: actions/setup-node@v1
         with:
@@ -30,6 +24,11 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-node-
 
+      - name: create dot env file
+        run: |
+          touch .env
+          echo "NEXT_PUBLIC_BACKEND_URL=${{ secrets.NEXT_PUBLIC_BACKEND_URL }}" >> .env
+      
       - name: install
         run: npm install --frozen-lockfile
 
