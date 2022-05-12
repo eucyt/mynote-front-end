@@ -72,6 +72,7 @@ export const useAuth = ({middleware, redirectIfAuthenticated = "/"}: Props = {})
             .post('/login', {email, password})
             .then(() => mutate())
             .catch(error => {
+                console.log(error.response)
                 if (error.response.status !== 422) throw error
 
                 setErrors(Object.values(error.response.data.errors).flat())
