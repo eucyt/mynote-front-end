@@ -28,12 +28,14 @@ jobs:
         run: |
           touch .env
           echo "NEXT_PUBLIC_BACKEND_URL=${{ secrets.NEXT_PUBLIC_BACKEND_URL }}" >> .env
-      
+
       - name: install
         run: npm install --frozen-lockfile
 
       - name: build
         run: npm run build
+        env:
+          BASE_PATH: ${{ secrets.BASE_PATH }}
 
       - name: export
         run: npm run export
