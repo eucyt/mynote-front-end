@@ -29,9 +29,6 @@ jobs:
 
       - name: build
         run: npm run build
-        env:
-          NEXT_PUBLIC_BASE_PATH: "/mynote-front-end"
-          NEXT_PUBLIC_BACKEND_URL: "http://mynote-api.euchi.jp"
 
       - name: export
         run: npm run export
