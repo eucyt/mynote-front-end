@@ -24,8 +24,6 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-node-
 
-      - name: create dot env file
-
       - name: install
         run: npm install --frozen-lockfile
 
