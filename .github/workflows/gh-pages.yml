@@ -8,6 +8,8 @@ on:
 jobs:
   build-deploy:
     runs-on: ubuntu-18.04
+    env:
+      BASE_PATH: ${{ secrets.BASE_PATH }}
     steps:
       - uses: actions/checkout@v2
 
@@ -34,8 +36,6 @@ jobs:
 
       - name: build
         run: npm run build
-        env:
-          BASE_PATH: ${{ secrets.BASE_PATH }}
 
       - name: export
         run: npm run export
