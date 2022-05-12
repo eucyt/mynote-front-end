@@ -35,7 +35,7 @@ jobs:
       - name: build
         run: npm run build
         env:
-          BASE_PATH: "/mynote-front-end"
+          NEXT_PUBLIC_BASE_PATH: "/mynote-front-end"
 
       - name: export
         run: npm run export

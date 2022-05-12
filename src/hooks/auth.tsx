@@ -145,7 +145,7 @@ export const useAuth = ({middleware, redirectIfAuthenticated = "/"}: Props = {})
                 .then(() => mutate())
         }
 
-        await useRouter().push('/login')
+        window.location.pathname = process.env.NEXT_PUBLIC_BASE_PATH + '/login'
     }
 
     useEffect(() => {
