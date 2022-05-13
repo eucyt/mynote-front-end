@@ -25,7 +25,6 @@ const Index = () => {
       <Head>
         <title>MyNote - Notes</title>
       </Head>
-      <title></title>
 
       <div className="m-2 sm:m-6 max-w-7xl p-6 overflow-hidden shadow-sm rounded-lg bg-white border border-gray-200">
         <button
