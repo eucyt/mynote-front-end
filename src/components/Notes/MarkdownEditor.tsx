@@ -10,6 +10,12 @@ type Props = {
 
 const MarkdownEditor: React.VFC<Props> = (props) => {
   const editorRef = React.useRef<Editor>(null)
+  const setValue = () => {
+    const editorInstance = editorRef.current?.getInstance()
+    if (editorInstance) {
+      props.setFunc(editorInstance?.getMarkdown())
+    }
+  }
 
   return (
     <Editor
@@ -22,10 +28,7 @@ const MarkdownEditor: React.VFC<Props> = (props) => {
       autofocus={false}
       // TODO: cursor jumping happened in onChange because this component is rendered
       onBlur={() => {
-        const editorInstance = editorRef.current?.getInstance()
-        if (editorInstance) {
-          props.setFunc(editorInstance?.getMarkdown())
-        }
+        setValue()
       }}
     />
   )
