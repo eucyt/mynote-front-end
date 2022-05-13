@@ -1,4 +1,4 @@
-import AppLayout from '@/components/Layouts/AppLayout'
+import AppLayout from '@/components/Common/Layouts/AppLayout'
 import Head from 'next/head'
 import React, {useEffect, useState} from "react";
 import {useRouter} from "next/router";
@@ -11,7 +11,7 @@ import {Editor} from "@toast-ui/react-editor";
 const Note = () => {
     const router = useRouter()
     const {fetchNote, updateNote, deleteNote, note, setNote} = notesApi()
-    const MarkdownEditor = dynamic(() => import('@/components/MarkdownEditor'), {ssr: false})
+    const MarkdownEditor = dynamic(() => import('@/components/Notes/MarkdownEditor'), {ssr: false})
     const [saveMessage, setSaveMessage] = useState<string>("")
     const editorRef = React.useRef<Editor>(null)
 
