@@ -1,18 +1,18 @@
-import React from "react"
+import React from 'react'
 
 type Props = {
-    status: string | null;
-    className?: string;
+  status: string | null
+  className?: string
 }
 
 const AuthSessionStatus: React.VFC<Props> = (props) => (
-    <>
-        {props.status && (
-            <div className={`${props.className} font-medium text-sm text-green-600`}>
-                {props.status}
-            </div>
-        )}
-    </>
+  <>
+    {props.status && (
+      <div className={`${props.className} font-medium text-sm text-green-600`}>
+        {props.status}
+      </div>
+    )}
+  </>
 )
 
 export default AuthSessionStatus
