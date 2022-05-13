@@ -1,4 +1,4 @@
-import Navigation from '@/components/Layouts/Navigation'
+import Navigation from '@/components/Common/Header/Navigation'
 import {useAuth} from '@/hooks/auth'
 import React from "react";
 

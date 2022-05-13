@@ -1,4 +1,4 @@
-import AppLayout from '@/components/Layouts/AppLayout'
+import AppLayout from '@/components/Common/Layouts/AppLayout'
 import Head from 'next/head'
 import React, {useEffect} from "react";
 import {notesApi} from "@/hooks/notesApi";
@@ -37,7 +37,7 @@ const Index = () => {
                         })
                     }}>create new note
                 </button>
-                
+
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 mt-6">
                     {notes.map((note) => {
                         return (

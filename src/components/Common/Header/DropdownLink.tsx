@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import {Menu} from '@headlessui/react'
 import React, {MouseEventHandler} from "react";
-import button from "@/components/Button";
+import button from "@/components/Common/Button";
 
 type DropdownLinkProps = {
     children?: React.ReactNode;
