@@ -7,119 +7,118 @@ import GuestLayout from '@/components/Common/Layouts/GuestLayout'
 import Input from '@/components/Auth/Input'
 import Label from '@/components/Auth/Label'
 import Link from 'next/link'
-import {useAuth} from '@/hooks/auth'
-import React, {useEffect, useState} from 'react'
-import {useRouter} from 'next/router'
+import { useAuth } from '@/hooks/auth'
+import React, { useEffect, useState } from 'react'
+import { useRouter } from 'next/router'
 
 const Login: React.VFC = () => {
-    const router = useRouter()
+  const router = useRouter()
 
-    const {login} = useAuth({middleware: 'guest'})
+  const { login } = useAuth({ middleware: 'guest' })
 
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
-    const [errors, setErrors] = useState<unknown[]>([])
-    const [status, setStatus] = useState<string | null>(null)
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [errors, setErrors] = useState<unknown[]>([])
+  const [status, setStatus] = useState<string | null>(null)
 
-    useEffect(() => {
-        if (router.query.reset && router.query.reset.length > 0 && errors.length === 0) {
-            setStatus(window.atob(router.query.reset as string))
-        } else {
-            setStatus(null)
-        }
-    })
-
-    const submitForm = async (event: { preventDefault: () => void }) => {
-        event.preventDefault()
-
-        await login({setErrors, setStatus, email, password})
+  useEffect(() => {
+    if (
+      router.query.reset &&
+      router.query.reset.length > 0 &&
+      errors.length === 0
+    ) {
+      setStatus(window.atob(router.query.reset as string))
+    } else {
+      setStatus(null)
     }
+  })
 
-    return (
-        <GuestLayout>
-            <AuthCard
-                logo={
-                    <Link href="/">
-                        <a>
-                            <ApplicationLogo/>
-                        </a>
-                    </Link>
-                }>
+  const submitForm = async (event: { preventDefault: () => void }) => {
+    event.preventDefault()
 
-                {/* Session Status */}
-                <AuthSessionStatus className="mb-4" status={status}/>
+    await login({ setErrors, setStatus, email, password })
+  }
 
-                {/* Validation Errors */}
-                <AuthValidationErrors className="mb-4" errors={errors}/>
+  return (
+    <GuestLayout>
+      <AuthCard
+        logo={
+          <Link href="/">
+            <a>
+              <ApplicationLogo />
+            </a>
+          </Link>
+        }>
+        {/* Session Status */}
+        <AuthSessionStatus className="mb-4" status={status} />
 
-                <form onSubmit={submitForm}>
-                    {/* Email Address */}
-                    <div>
-                        <Label htmlFor="email">Email</Label>
+        {/* Validation Errors */}
+        <AuthValidationErrors className="mb-4" errors={errors} />
 
-                        <Input
-                            id="email"
-                            type="email"
-                            value={email}
-                            className="block mt-1 w-full"
-                            onChange={event => setEmail(event.target.value)}
-                            required
-                            autoFocus
-                        />
-                    </div>
+        <form onSubmit={submitForm}>
+          {/* Email Address */}
+          <div>
+            <Label htmlFor="email">Email</Label>
 
-                    {/* Password */}
-                    <div className="mt-4">
-                        <Label htmlFor="password">Password</Label>
+            <Input
+              id="email"
+              type="email"
+              value={email}
+              className="block mt-1 w-full"
+              onChange={(event) => setEmail(event.target.value)}
+              required
+              autoFocus
+            />
+          </div>
 
-                        <Input
-                            id="password"
-                            type="password"
-                            value={password}
-                            className="block mt-1 w-full"
-                            onChange={event => setPassword(event.target.value)}
-                            required
-                            autoComplete="current-password"
-                        />
-                    </div>
+          {/* Password */}
+          <div className="mt-4">
+            <Label htmlFor="password">Password</Label>
 
-                    {/* Remember Me */}
-                    <div className="block mt-4">
-                        <label
-                            htmlFor="remember_me"
-                            className="inline-flex items-center">
-                            <input
-                                id="remember_me"
-                                type="checkbox"
-                                name="remember"
-                                className="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                            />
+            <Input
+              id="password"
+              type="password"
+              value={password}
+              className="block mt-1 w-full"
+              onChange={(event) => setPassword(event.target.value)}
+              required
+              autoComplete="current-password"
+            />
+          </div>
 
-                            <span className="ml-2 text-sm text-gray-600">
-                                Remember me
-                            </span>
-                        </label>
-                    </div>
+          {/* Remember Me */}
+          <div className="block mt-4">
+            <label htmlFor="remember_me" className="inline-flex items-center">
+              <input
+                id="remember_me"
+                type="checkbox"
+                name="remember"
+                className="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+              />
 
-                    <div className="flex items-center justify-end mt-4">
-                        <Link href="/register">
-                            <a className="underline text-sm text-gray-600 hover:text-gray-900 mr-4">
-                                Sign up
-                            </a>
-                        </Link>
+              <span className="ml-2 text-sm text-gray-600">Remember me</span>
+            </label>
+          </div>
 
-                        <Link href="/forgot-password">
-                            <a className="underline text-sm text-gray-600 hover:text-gray-900">
-                                Forgot your password?
-                            </a>
-                        </Link>
+          <div className="flex items-center justify-end mt-4">
+            <Link href="/register">
+              <a className="underline text-sm text-gray-600 hover:text-gray-900 mr-4">
+                Sign up
+              </a>
+            </Link>
 
-                        <Button className="ml-3">Login</Button>
-                    </div>
-                </form>
-            </AuthCard>
-        </GuestLayout>
-    )
+            <Link href="/forgot-password">
+              <a className="underline text-sm text-gray-600 hover:text-gray-900">
+                Forgot your password?
+              </a>
+            </Link>
+
+            <Button className="ml-3">Login</Button>
+          </div>
+        </form>
+      </AuthCard>
+    </GuestLayout>
+  )
 }
 
 export default Login
