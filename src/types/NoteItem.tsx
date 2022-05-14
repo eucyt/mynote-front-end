@@ -6,4 +6,4 @@ export interface NoteItem {
   updated_at: string
 }
 
-export type NoteRequest = Pick<NoteItem, 'id' | 'title' | 'body'>
+export type NoteRequest = Pick<NoteItem, 'title' | 'body'>

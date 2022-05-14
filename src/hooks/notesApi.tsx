@@ -1,26 +1,31 @@
 import axios from '@/lib/axios'
-import { useState } from 'react'
-import { NoteItem, NoteRequest } from '@/types/NoteItem'
 import { NextRouter } from 'next/dist/client/router'
+import { NoteItem, NoteRequest } from '@/types/NoteItem'
+import React from 'react'
 
 export const notesApi = () => {
-  const [notes, setNotes] = useState<Array<NoteItem>>([])
-  const [note, setNote] = useState<NoteItem>()
-
   const csrf = (): Promise<void> => axios.get('/sanctum/csrf-cookie')
 
-  const fetchNotes = () => {
-    axios.get('/api/notes').then((res) => setNotes(res.data.data))
-  }
-
-  const createNote = async () => {
+  const createNote = async (
+    setNote: React.Dispatch<React.SetStateAction<NoteItem | undefined>>
+  ) => {
     // TODO: csrf works?
     await csrf()
     await axios.post('/api/notes').then((res) => setNote(res.data))
   }
 
-  const fetchNote = async (noteId: number, router: NextRouter) => {
-    await axios
+  const fetchNotes = (
+    setNotes: React.Dispatch<React.SetStateAction<NoteItem[]>>
+  ) => {
+    return axios.get('/api/notes').then((res) => setNotes(res.data.data))
+  }
+
+  const fetchNote = async (
+    setNote: React.Dispatch<React.SetStateAction<NoteItem | undefined>>,
+    noteId: number,
+    router: NextRouter
+  ) => {
+    return await axios
       .get('/api/notes/' + noteId)
       .then((res) => setNote(res.data.data))
       .catch((error) => {
@@ -31,14 +36,9 @@ export const notesApi = () => {
       })
   }
 
-  const updateNote = async (noteRequest: NoteRequest) => {
-    // TODO: csrf works?
+  const updateNote = async (noteId: Number, note: NoteRequest) => {
     await csrf()
-    await axios
-      .put('/api/notes/' + noteRequest.id, noteRequest)
-      .then
-      // TODO
-      ()
+    await axios.put('/api/notes/' + noteId, note)
   }
 
   const deleteNote = async (noteId: number) => {
@@ -56,9 +56,6 @@ export const notesApi = () => {
     fetchNote,
     fetchNotes,
     updateNote,
-    deleteNote,
-    note,
-    notes,
-    setNote
+    deleteNote
   }
 }
