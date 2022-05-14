@@ -40,10 +40,6 @@ const Note = () => {
           <label className="text-xl pl-2 absolute bottom-0 inline-block">
             Title
           </label>
-          <button className="px-2 py-1 absolute right-20 rounded transition duration-500 hover:bg-blue-400 border border-blue-200 bg-blue-100">
-            Save
-            {/* HACK: This is dummy. This note with latest body is saved by clicking this button because MarkdownEditor must be blur in this case. */}
-          </button>
           <button
             className="px-2 py-1 absolute right-0 rounded transition duration-500 hover:bg-red-400 border border-red-200 bg-red-100"
             onClick={() => {
