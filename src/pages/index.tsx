@@ -1,24 +1,28 @@
 import AppLayout from '@/components/Common/Layouts/AppLayout'
 import Head from 'next/head'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { notesApi } from '@/hooks/notesApi'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
+import { Arr } from 'tern'
+import { NoteItem } from '@/types/NoteItem'
 
 const Index = () => {
-  const { fetchNotes, createNote, note, notes } = notesApi()
+  const { fetchNotes, createNote } = notesApi()
   const router = useRouter()
+  const [notes, setNotes] = useState<Array<NoteItem>>([])
+  const [newNote, setNewNote] = useState<NoteItem>()
 
   useEffect(() => {
-    fetchNotes()
+    fetchNotes(setNotes)
   }, [])
 
   // redirect new note page if new note is created
   useEffect(() => {
-    if (note) {
-      router.push('/notes/' + note?.id)
+    if (newNote) {
+      router.push('/notes/' + newNote.id)
     }
-  }, [note])
+  }, [newNote])
 
   return (
     <AppLayout>
@@ -30,7 +34,7 @@ const Index = () => {
         <button
           className="p-3 m-6 rounded transition duration-500 hover:opacity-50 border border-gray-200 bg-gray-100"
           onClick={() => {
-            createNote().then(() => {})
+            createNote(setNewNote).then(() => {})
           }}>
           create new note
         </button>
