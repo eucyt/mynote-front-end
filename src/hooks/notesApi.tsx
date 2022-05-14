@@ -1,6 +1,6 @@
 import axios from '@/lib/axios'
 import { useState } from 'react'
-import { NoteItem, NoteRequest } from '@/types/NoteItem'
+import { NoteItem } from '@/types/NoteItem'
 import { NextRouter } from 'next/dist/client/router'
 
 export const notesApi = () => {
@@ -31,14 +31,9 @@ export const notesApi = () => {
       })
   }
 
-  const updateNote = async (noteRequest: NoteRequest) => {
-    // TODO: csrf works?
+  const updateBody = async (noteId: Number, body: string) => {
     await csrf()
-    await axios
-      .put('/api/notes/' + noteRequest.id, noteRequest)
-      .then
-      // TODO
-      ()
+    await axios.put('/api/notes/' + noteId, { body })
   }
 
   const deleteNote = async (noteId: number) => {
@@ -55,7 +50,7 @@ export const notesApi = () => {
     createNote,
     fetchNote,
     fetchNotes,
-    updateNote,
+    updateBody,
     deleteNote,
     note,
     notes,

@@ -5,5 +5,3 @@ export interface NoteItem {
   created_at: string
   updated_at: string
 }
-
-export type NoteRequest = Pick<NoteItem, 'id' | 'title' | 'body'>

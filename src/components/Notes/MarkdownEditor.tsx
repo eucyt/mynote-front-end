@@ -1,37 +1,29 @@
-import React from 'react'
-import '@toast-ui/editor/dist/toastui-editor.css'
-import { Editor } from '@toast-ui/react-editor'
+import React, { useEffect, useState } from 'react'
+import SimpleMde from 'react-simplemde-editor'
+import 'easymde/dist/easymde.min.css'
+import { notesApi } from '@/hooks/notesApi'
 
 type Props = {
-  initialValue: string
-  setFunc: (value: string) => void
-  ref: React.RefObject<Editor>
+  initialBody?: string
+  id: Number
 }
 
-const MarkdownEditor: React.VFC<Props> = (props) => {
-  const editorRef = React.useRef<Editor>(null)
-  const setValue = () => {
-    const editorInstance = editorRef.current?.getInstance()
-    if (editorInstance) {
-      props.setFunc(editorInstance?.getMarkdown())
-    }
+export const MarkdownEditor: React.VFC<Props> = (props) => {
+  const [body, setBody] = useState('')
+  const { updateBody } = notesApi()
+  const onChange = (value: string) => {
+    setBody(value)
   }
 
-  return (
-    <Editor
-      ref={editorRef}
-      initialValue={props.initialValue}
-      previewStyle="vertical"
-      height="600px"
-      initialEditType="markdown"
-      useCommandShortcut={true}
-      autofocus={false}
-      // TODO: cursor jumping happened in onChange because this component is rendered
-      onBlur={() => {
-        setValue()
-      }}
-    />
-  )
+  useEffect(() => {
+    updateBody(props.id, body).then((r) => console.log('updated'))
+  }, [body])
+
+  useEffect(() => {
+    if (props.initialBody) setBody(props.initialBody)
+  }, [props.initialBody])
+
+  return <SimpleMde value={body} onChange={onChange} />
 }
 
 export default MarkdownEditor

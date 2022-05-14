@@ -3,19 +3,16 @@ import Head from 'next/head'
 import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import { notesApi } from '@/hooks/notesApi'
-import '@toast-ui/editor/dist/toastui-editor.css'
 import dynamic from 'next/dynamic'
-import { Editor } from '@toast-ui/react-editor'
 
 const Note = () => {
   const router = useRouter()
-  const { fetchNote, updateNote, deleteNote, note, setNote } = notesApi()
+  const { fetchNote, deleteNote, note, setNote } = notesApi()
   const MarkdownEditor = dynamic(
     () => import('@/components/Notes/MarkdownEditor'),
     { ssr: false }
   )
   const [saveMessage, setSaveMessage] = useState<string>('')
-  const editorRef = React.useRef<Editor>(null)
 
   useEffect(() => {
     if (router.isReady) {
@@ -25,9 +22,9 @@ const Note = () => {
 
   useEffect(() => {
     if (note) {
-      updateNote(note).then(() => {
-        setSaveMessage(new Date().toLocaleTimeString() + 'に保存済み')
-      })
+      // updateNote(note).then(() => {
+      //   setSaveMessage(new Date().toLocaleTimeString() + 'に保存済み')
+      // })
     }
   }, [note])
 
@@ -68,11 +65,7 @@ const Note = () => {
         />
 
         <label className="text-xl ml-2">Body</label>
-        <MarkdownEditor
-          ref={editorRef}
-          initialValue={note?.body ?? ''}
-          setFunc={(body) => note && setNote({ ...note, body })}
-        />
+        <MarkdownEditor initialBody={note?.body} id={Number(router.query.id)} />
       </div>
     </AppLayout>
   )
