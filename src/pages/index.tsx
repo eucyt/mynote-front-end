@@ -4,7 +4,6 @@ import React, { useEffect, useState } from 'react'
 import { notesApi } from '@/hooks/notesApi'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
-import { Arr } from 'tern'
 import { NoteItem } from '@/types/NoteItem'
 
 const Index = () => {
