@@ -15,7 +15,7 @@ type Props = {
 const Navigation: React.VFC<Props> = ({ user }) => {
   const router = useRouter()
 
-  const { logout } = useAuth({})
+  const { logout, withdraw } = useAuth({})
 
   const [open, setOpen] = useState<boolean>(false)
 
@@ -65,6 +65,17 @@ const Navigation: React.VFC<Props> = ({ user }) => {
               }>
               {/* Authentication */}
               <DropdownButton onClick={logout}>Logout</DropdownButton>
+              <DropdownButton
+                onClick={() => {
+                  if (
+                    confirm(
+                      '退会してもよろしいですか？\n作成したデータは消去されます。'
+                    )
+                  )
+                    withdraw()
+                }}>
+                Withdraw
+              </DropdownButton>
             </Dropdown>
           </div>
 
@@ -144,6 +155,17 @@ const Navigation: React.VFC<Props> = ({ user }) => {
             <div className="mt-3 space-y-1">
               {/* Authentication */}
               <ResponsiveNavButton onClick={logout}>Logout</ResponsiveNavButton>
+              <ResponsiveNavButton
+                onClick={() => {
+                  if (
+                    confirm(
+                      '退会してもよろしいですか？\n作成したデータは消去されます。'
+                    )
+                  )
+                    withdraw()
+                }}>
+                Withdraw
+              </ResponsiveNavButton>
             </div>
           </div>
         </div>

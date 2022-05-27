@@ -175,6 +175,11 @@ export const useAuth = ({
     window.location.pathname = process.env.NEXT_PUBLIC_BASE_PATH + '/login'
   }
 
+  const withdraw = async (): Promise<void> => {
+    await csrf()
+    axios.delete('/withdraw').then(() => mutate())
+  }
+
   useEffect(() => {
     if (middleware === 'guest' && redirectIfAuthenticated && user)
       router.push(redirectIfAuthenticated)
@@ -188,6 +193,7 @@ export const useAuth = ({
     forgotPassword,
     resetPassword,
     resendEmailVerification,
-    logout
+    logout,
+    withdraw
   }
 }
