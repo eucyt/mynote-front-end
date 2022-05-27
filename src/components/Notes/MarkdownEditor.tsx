@@ -66,7 +66,7 @@ export const MarkdownEditor: React.VFC = () => {
         onClick={() => {
           setSaveMessage('保存中です...')
           updateNote(Number(router.query.id), { title, body }).then(() =>
-            setSaveMessage('保存中しました!')
+            setSaveMessage('保存しました!')
           )
         }}>
         Save
