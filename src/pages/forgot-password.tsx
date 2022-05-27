@@ -6,9 +6,8 @@ import Button from '@/components/Common/Button'
 import GuestLayout from '@/components/Common/Layouts/GuestLayout'
 import Input from '@/components/Auth/Input'
 import Label from '@/components/Auth/Label'
-import Link from 'next/link'
 import { useAuth } from '@/hooks/auth'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import FullSizeLoading from '@/components/Common/FullSizeLoading'
 
 const ForgotPassword: React.VFC = () => {
@@ -19,10 +18,10 @@ const ForgotPassword: React.VFC = () => {
   const [status, setStatus] = useState<string | null>(null)
   const [loading, setLoading] = useState(false)
 
-  const submitForm = (event: { preventDefault: () => void }) => {
+  const submitForm = async (event: { preventDefault: () => void }) => {
     setLoading(true)
     event.preventDefault()
-    forgotPassword({ setErrors, setStatus, email })
+    await forgotPassword({ setErrors, setStatus, email })
     setLoading(false)
   }
 

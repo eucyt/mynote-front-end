@@ -7,7 +7,7 @@ import Input from '@/components/Auth/Input'
 import Label from '@/components/Auth/Label'
 import Link from 'next/link'
 import { useAuth } from '@/hooks/auth'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import FullSizeLoading from '@/components/Common/FullSizeLoading'
 
 const Register: React.VFC = () => {
@@ -20,10 +20,10 @@ const Register: React.VFC = () => {
   const [errors, setErrors] = useState<unknown[]>([])
   const [loading, setLoading] = useState(false)
 
-  const submitForm = (event: { preventDefault: () => void }) => {
+  const submitForm = async (event: { preventDefault: () => void }) => {
     setLoading(true)
     event.preventDefault()
-    register({ setErrors, name, email, password, passwordConfirmation })
+    await register({ setErrors, name, email, password, passwordConfirmation })
     setLoading(false)
   }
 
