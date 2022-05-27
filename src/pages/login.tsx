@@ -49,11 +49,9 @@ const Login: React.VFC = () => {
       <GuestLayout>
         <AuthCard
           logo={
-            <Link href="/">
-              <a>
-                <ApplicationLogo />
-              </a>
-            </Link>
+            <a>
+              <ApplicationLogo />
+            </a>
           }>
           {/* Session Status */}
           <AuthSessionStatus className="mb-4" status={status} />

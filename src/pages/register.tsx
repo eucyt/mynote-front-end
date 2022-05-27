@@ -32,14 +32,7 @@ const Register: React.VFC = () => {
   } else {
     return (
       <GuestLayout>
-        <AuthCard
-          logo={
-            <Link href="/">
-              <a>
-                <ApplicationLogo />
-              </a>
-            </Link>
-          }>
+        <AuthCard logo={<ApplicationLogo />}>
           {/* Validation Errors */}
           <AuthValidationErrors className="mb-4" errors={errors} />
 
