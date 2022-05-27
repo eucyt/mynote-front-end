@@ -51,7 +51,12 @@ export const useAuth = ({
     setErrors([])
 
     axios
-      .post('/register', { name, email, password, passwordConfirmation })
+      .post('/register', {
+        name,
+        email,
+        password,
+        password_confirmation: passwordConfirmation
+      })
       .then(() => mutate())
       .catch((error) => {
         if (error.response.status !== 422) throw error
