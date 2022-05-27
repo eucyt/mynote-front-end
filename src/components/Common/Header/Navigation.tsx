@@ -10,12 +10,22 @@ import React, { useState } from 'react'
 
 type Props = {
   user: any
+  setLoading: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const Navigation: React.VFC<Props> = ({ user }) => {
+const Navigation: React.VFC<Props> = (props) => {
   const router = useRouter()
-
   const { logout, withdraw } = useAuth({})
+  const logoutOnClick = () => {
+    props.setLoading(true)
+    logout()
+  }
+  const withdrawOnClick = () => {
+    if (confirm('退会してもよろしいですか？\n作成したデータは消去されます。')) {
+      props.setLoading(true)
+      withdraw()
+    }
+  }
 
   const [open, setOpen] = useState<boolean>(false)
 
@@ -47,7 +57,7 @@ const Navigation: React.VFC<Props> = ({ user }) => {
             <Dropdown
               trigger={
                 <button className="flex items-center text-sm font-medium text-gray-500 hover:text-gray-700 focus:outline-none transition duration-150 ease-in-out">
-                  <div>{user?.name}</div>
+                  <div>{props.user?.name}</div>
 
                   <div className="ml-1">
                     <svg
@@ -64,16 +74,8 @@ const Navigation: React.VFC<Props> = ({ user }) => {
                 </button>
               }>
               {/* Authentication */}
-              <DropdownButton onClick={logout}>Logout</DropdownButton>
-              <DropdownButton
-                onClick={() => {
-                  if (
-                    confirm(
-                      '退会してもよろしいですか？\n作成したデータは消去されます。'
-                    )
-                  )
-                    withdraw()
-                }}>
+              <DropdownButton onClick={logoutOnClick}>Logout</DropdownButton>
+              <DropdownButton onClick={withdrawOnClick}>
                 Withdraw
               </DropdownButton>
             </Dropdown>
@@ -144,26 +146,20 @@ const Navigation: React.VFC<Props> = ({ user }) => {
 
               <div className="ml-3">
                 <div className="font-medium text-base text-gray-800">
-                  {user?.name}
+                  {props.user?.name}
                 </div>
                 <div className="font-medium text-sm text-gray-500">
-                  {user?.email}
+                  {props.user?.email}
                 </div>
               </div>
             </div>
 
             <div className="mt-3 space-y-1">
               {/* Authentication */}
-              <ResponsiveNavButton onClick={logout}>Logout</ResponsiveNavButton>
-              <ResponsiveNavButton
-                onClick={() => {
-                  if (
-                    confirm(
-                      '退会してもよろしいですか？\n作成したデータは消去されます。'
-                    )
-                  )
-                    withdraw()
-                }}>
+              <ResponsiveNavButton onClick={logoutOnClick}>
+                Logout
+              </ResponsiveNavButton>
+              <ResponsiveNavButton onClick={withdrawOnClick}>
                 Withdraw
               </ResponsiveNavButton>
             </div>
