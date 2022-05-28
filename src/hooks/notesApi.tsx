@@ -14,7 +14,7 @@ export const notesApi = () => {
     await axios.post('/api/notes').then((res) => setNote(res.data))
   }
 
-  const fetchNotes = (
+  const fetchNotes = async (
     setNotes: React.Dispatch<React.SetStateAction<NoteItem[]>>
   ) => {
     return axios.get('/api/notes').then((res) => setNotes(res.data.data))
