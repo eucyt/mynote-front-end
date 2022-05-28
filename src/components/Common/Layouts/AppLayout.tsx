@@ -1,7 +1,6 @@
 import Navigation from '@/components/Common/Header/Navigation'
 import { useAuth } from '@/hooks/auth'
 import React, { useState } from 'react'
-import Loading from '@/components/Common/Loading'
 import FullSizeLoading from '@/components/Common/FullSizeLoading'
 
 type Props = {
