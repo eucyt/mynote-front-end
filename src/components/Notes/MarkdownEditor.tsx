@@ -18,7 +18,7 @@ export const MarkdownEditor: React.VFC = () => {
   // loading init note
   useEffect(() => {
     if (router.isReady) {
-      fetchNote(setNote, Number(router.query.id), router)
+      fetchNote(setNote, Number(router.query.id))
     }
   }, [router.query])
 
