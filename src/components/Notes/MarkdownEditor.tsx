@@ -32,9 +32,7 @@ export const MarkdownEditor: React.VFC = () => {
   }, [note])
 
   if (loading) {
-    return (
-        <Loading />
-    )
+    return <Loading />
   } else {
     return (
       <>
