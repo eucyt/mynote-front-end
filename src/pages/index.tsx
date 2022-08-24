@@ -1,4 +1,4 @@
-import AppLayout from '@/components/Common/Layouts/AppLayout'
+import AuthenticatedLayout from '@/components/Common/Layouts/AuthenticatedLayout'
 import Head from 'next/head'
 import React, { useEffect, useState } from 'react'
 import { notesApi } from '@/hooks/notesApi'
@@ -29,7 +29,7 @@ const Index = () => {
     return <FullSizeLoading />
   } else {
     return (
-      <AppLayout>
+      <AuthenticatedLayout>
         <Head>
           <title>MyNote - Notes</title>
         </Head>
@@ -58,7 +58,7 @@ const Index = () => {
             })}
           </div>
         </div>
-      </AppLayout>
+      </AuthenticatedLayout>
     )
   }
 }

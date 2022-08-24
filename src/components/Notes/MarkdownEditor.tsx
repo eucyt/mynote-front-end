@@ -33,9 +33,7 @@ export const MarkdownEditor: React.VFC = () => {
 
   if (loading) {
     return (
-      <div className="my-10 w-full flex justify-center items-center">
         <Loading />
-      </div>
     )
   } else {
     return (

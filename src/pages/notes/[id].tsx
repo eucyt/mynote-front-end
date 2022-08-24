@@ -1,4 +1,4 @@
-import AppLayout from '@/components/Common/Layouts/AppLayout'
+import AuthenticatedLayout from '@/components/Common/Layouts/AuthenticatedLayout'
 import Head from 'next/head'
 import dynamic from 'next/dynamic'
 
@@ -9,15 +9,17 @@ const Note = () => {
   )
 
   return (
-    <AppLayout>
+    <AuthenticatedLayout>
       <Head>
         <title>MyNote - Notes</title>
       </Head>
 
-      <div className="m-2 sm:m-6 max-w-7xl p-6 overflow-hidden shadow-sm rounded-lg bg-white border border-gray-200">
+      <div className="flex justify-center">
+      <div className="m-2 sm:m-6 max-w-6xl p-6 overflow-hidden shadow-sm rounded-lg bg-white border border-gray-200">
         <MarkdownEditor />
       </div>
-    </AppLayout>
+      </div>
+    </AuthenticatedLayout>
   )
 }
 
