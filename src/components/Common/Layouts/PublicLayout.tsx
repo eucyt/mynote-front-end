@@ -5,7 +5,7 @@ type Props = {
   children: React.ReactNode
 }
 
-// 一般画面
+// 一般公開画面
 const PublicLayout: React.VFC<Props> = ({ children }) => {
   return (
     <>
