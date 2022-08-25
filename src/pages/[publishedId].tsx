@@ -1,16 +1,16 @@
 import { NoteItem } from '@/types/NoteItem'
 import axios from '@/lib/axios'
-import GuestLayout from '@/components/Common/Layouts/GuestLayout'
 import PublishedNoteContent from '@/components/Notes/PublishedNoteContent'
+import PublicLayout from '@/components/Common/Layouts/PublicLayout'
 
 interface Props {
   note: NoteItem
 }
 
 const PublishedNote = (props: Props) => (
-  <GuestLayout>
+  <PublicLayout>
     <PublishedNoteContent note={props.note} />
-  </GuestLayout>
+  </PublicLayout>
 )
 
 export default PublishedNote
