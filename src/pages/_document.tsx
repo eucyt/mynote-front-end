@@ -1,12 +1,6 @@
 import * as React from 'react'
-import { RenderPageResult } from 'next/dist/shared/lib/utils'
-import Document, {
-  DocumentInitialProps,
-  Head,
-  Html,
-  Main,
-  NextScript
-} from 'next/document'
+import {RenderPageResult} from 'next/dist/shared/lib/utils'
+import Document, {DocumentInitialProps, Head, Html, Main, NextScript} from 'next/document'
 import createEmotionServer from '@emotion/server/create-instance'
 import createEmotionCache from 'createEmotionCache'
 import theme from 'theme'
@@ -17,7 +11,8 @@ export default class MyDocument extends Document {
       <Html lang="ja">
         <Head>
           {/* PWA primary color */}
-          <meta name="theme-color" content={theme.palette.primary.main} />
+          <meta name="theme-color" content={theme.palette.primary.main}/>
+          <link rel="icon" type="image/ico" sizes="32x32" href="/favicon.ico"/>
 
           <link
             href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap"
@@ -25,8 +20,8 @@ export default class MyDocument extends Document {
           />
         </Head>
         <body>
-          <Main />
-          <NextScript />
+        <Main/>
+        <NextScript/>
         </body>
       </Html>
     )
@@ -63,15 +58,15 @@ MyDocument.getInitialProps = async (ctx): Promise<DocumentInitialProps> => {
   // You can consider sharing the same emotion cache between all the SSR requests to speed up performance.
   // However, be aware that it can have global side effects.
   const cache = createEmotionCache()
-  const { extractCriticalToChunks } = createEmotionServer(cache)
+  const {extractCriticalToChunks} = createEmotionServer(cache)
 
   ctx.renderPage = (): RenderPageResult | Promise<RenderPageResult> =>
     originalRenderPage({
       enhanceApp:
         (App: any) =>
-        // eslint-disable-next-line react/display-name
-        (props): JSX.Element =>
-          <App emotionCache={cache} {...props} />
+          // eslint-disable-next-line react/display-name
+          (props): JSX.Element =>
+            <App emotionCache={cache} {...props} />
     })
 
   const initialProps = await Document.getInitialProps(ctx)
@@ -83,7 +78,7 @@ MyDocument.getInitialProps = async (ctx): Promise<DocumentInitialProps> => {
       data-emotion={`${style.key} ${style.ids.join(' ')}`}
       key={style.key}
       // eslint-disable-next-line react/no-danger
-      dangerouslySetInnerHTML={{ __html: style.css }}
+      dangerouslySetInnerHTML={{__html: style.css}}
     />
   ))
 
