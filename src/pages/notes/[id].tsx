@@ -15,7 +15,7 @@ const Note = () => {
       </Head>
 
       <div className="flex justify-center">
-        <div className="m-2 sm:m-6 max-w-6xl p-6 overflow-hidden shadow-sm rounded-lg bg-white border border-gray-200">
+        <div className="m-2 sm:m-6 max-w-6xl w-full p-2 sm:p-6 overflow-hidden shadow-sm rounded-lg bg-white border border-gray-200">
           <MarkdownEditor />
         </div>
       </div>

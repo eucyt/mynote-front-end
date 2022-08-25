@@ -32,7 +32,11 @@ export const MarkdownEditor: React.VFC = () => {
   }, [note])
 
   if (loading) {
-    return <Loading />
+    return (
+      <div className="flex justify-center py-20">
+        <Loading />
+      </div>
+    )
   } else {
     return (
       <>
@@ -45,7 +49,7 @@ export const MarkdownEditor: React.VFC = () => {
             onClick={() => {
               setLoading(true)
               deleteNote(Number(router.query.id)).then(() => {
-                router.push('/')
+                router.push('/notes/')
               })
             }}>
             Delete
