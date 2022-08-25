@@ -10,7 +10,7 @@ type Props = {
 
 export const useAuth = ({
   middleware,
-  redirectIfAuthenticated = '/'
+  redirectIfAuthenticated = '/notes/'
 }: Props = {}) => {
   const router = useRouter()
 
