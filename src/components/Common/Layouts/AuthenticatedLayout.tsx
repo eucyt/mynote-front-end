@@ -8,6 +8,7 @@ type Props = {
   children?: React.ReactNode
 }
 
+// 認証済みの画面
 const AuthenticatedLayout: React.VFC<Props> = (props) => {
   const { user } = useAuth({ middleware: 'auth' })
   const [loading, setLoading] = useState(false)

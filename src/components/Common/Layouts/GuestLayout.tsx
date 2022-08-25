@@ -5,6 +5,7 @@ type Props = {
   children: React.ReactNode
 }
 
+// ログイン画面などのヘッダーがない認証前の画面
 const GuestLayout: React.VFC<Props> = ({ children }) => {
   return (
     <div>
