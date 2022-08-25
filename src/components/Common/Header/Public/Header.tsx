@@ -11,14 +11,12 @@ const Header: React.VFC = () => {
             <div className="flex-shrink-0 flex items-center">
               <Link href="/">
                 <a>
-                  <ApplicationLogo className="block h-10 w-auto fill-current"/>
+                  <ApplicationLogo className="block h-10 w-auto fill-current" />
                 </a>
               </Link>
             </div>
             <div className="flex items-center ml-4">
-              <p className="text-sm font-medium">
-                MyNote
-              </p>
+              <p className="text-sm font-medium">MyNote</p>
             </div>
           </div>
         </div>
