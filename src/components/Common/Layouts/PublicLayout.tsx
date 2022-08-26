@@ -1,5 +1,6 @@
 import React from 'react'
 import Header from '@/components/Common/Header/Public/Header'
+import Footer from '@/components/Common/Header/Public/Footer'
 
 type Props = {
   children: React.ReactNode
@@ -12,6 +13,7 @@ const PublicLayout: React.VFC<Props> = ({ children }) => {
       <div className="min-h-screen bg-gray-100">
         <Header />
         <main className="">{children}</main>
+        <Footer />
       </div>
     </>
   )

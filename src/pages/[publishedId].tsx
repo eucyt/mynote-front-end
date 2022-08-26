@@ -9,7 +9,11 @@ interface Props {
 
 const PublishedNote = (props: Props) => (
   <PublicLayout>
-    <PublishedNoteContent note={props.note} />
+    <div className="flex justify-center p-2">
+      <div className="sm:my-12 mx-auto w-full sm:w-4/5 max-w-5xl bg-white rounded-lg shadow-lg py-8 p-6 sm:py-20 sm:px-12 flex justify-center">
+        <PublishedNoteContent note={props.note} />
+      </div>
+    </div>
   </PublicLayout>
 )
 

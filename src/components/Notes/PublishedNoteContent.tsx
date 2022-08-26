@@ -14,6 +14,7 @@ const PublishedNoteContent: React.VFC<Props> = (props: Props) => {
         <title>{props.note.title}</title>
       </Head>
       <article className="prose">
+        <h1 className="text-3xl mb-20">{props.note.title}</h1>
         <div
           dangerouslySetInnerHTML={{ __html: marked(props.note.body ?? '') }}
         />
