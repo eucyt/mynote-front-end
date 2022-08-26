@@ -49,6 +49,24 @@ export const notesApi = () => {
       .catch((error) => setError(error))
   }
 
+  const publishNote: (noteId: number) => Promise<string> = async (
+    noteId: number
+  ) => {
+    return await axios
+      .put('/api/notes/' + noteId + '/publish')
+      .then((res) => {
+        return res.data
+      })
+      .catch((error) => setError(error))
+  }
+
+  const unpublishNote = async (noteId: number) => {
+    await axios
+      .put('/api/notes/' + noteId + '/unpublish')
+      .then((res) => res)
+      .catch((error) => setError(error))
+  }
+
   useEffect(() => {
     if (error) {
       if (error.response.status === 401) router.push('/login')
@@ -61,6 +79,8 @@ export const notesApi = () => {
     fetchNote,
     fetchNotes,
     updateNote,
-    deleteNote
+    deleteNote,
+    publishNote,
+    unpublishNote
   }
 }
