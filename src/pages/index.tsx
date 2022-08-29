@@ -1,10 +1,14 @@
 import React from 'react'
 import PublicLayout from '@/components/Common/Layouts/PublicLayout'
 import ApplicationLogo from '@/components/Common/ApplicationLogo'
+import Head from "next/head";
 
 const Index = () => {
   return (
     <PublicLayout>
+      <Head>
+        <title>MyNote</title>
+      </Head>
       <div className="h-screen w-screen flex justify-center items-center">
         <div>
           <ApplicationLogo className="mx-auto" />
