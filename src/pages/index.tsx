@@ -7,7 +7,7 @@ const Index = () => {
   return (
     <PublicLayout>
       <Head>
-        <title>MyNote</title>
+        <title>MyNote - Home</title>
       </Head>
       <div className="h-screen w-screen flex justify-center items-center">
         <div>
