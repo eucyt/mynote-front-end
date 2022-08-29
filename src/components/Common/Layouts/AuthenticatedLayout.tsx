@@ -1,4 +1,4 @@
-import Navigation from '@/components/Common/Header/Navigation'
+import Navigation from '@/components/Common/Header/Authenticated/Navigation'
 import { useAuth } from '@/hooks/auth'
 import React, { useState } from 'react'
 import FullSizeLoading from '@/components/Common/FullSizeLoading'
