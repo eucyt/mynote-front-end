@@ -37,7 +37,7 @@ const Navigation: React.VFC<Props> = (props) => {
           <div className="flex">
             {/* Logo */}
             <div className="flex-shrink-0 flex items-center">
-              <Link href="/">
+              <Link href="/notes/">
                 <a>
                   <ApplicationLogo className="block h-10 w-auto fill-current" />
                 </a>
