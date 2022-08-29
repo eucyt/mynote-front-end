@@ -50,6 +50,11 @@ const Navigation: React.VFC<Props> = (props) => {
                 Home
               </NavLink>
             </div>
+            <div className="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+              <NavLink href="/notes/" active={router.pathname === '/notes'}>
+                Notes
+              </NavLink>
+            </div>
           </div>
 
           {/* Settings Dropdown */}

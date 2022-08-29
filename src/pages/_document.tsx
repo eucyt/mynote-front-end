@@ -18,6 +18,7 @@ export default class MyDocument extends Document {
         <Head>
           {/* PWA primary color */}
           <meta name="theme-color" content={theme.palette.primary.main} />
+          <link rel="icon" type="image/ico" sizes="32x32" href="/favicon.ico" />
 
           <link
             href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap"

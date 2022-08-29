@@ -4,15 +4,12 @@ import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 
 export const notesApi = () => {
-  const csrf = (): Promise<void> => axios.get('/sanctum/csrf-cookie')
   const router = useRouter()
   const [error, setError] = useState<any>()
 
   const createNote = async (
     setNote: React.Dispatch<React.SetStateAction<NoteItem | undefined>>
   ) => {
-    // TODO: csrf works?
-    await csrf()
     await axios
       .post('/api/notes')
       .then((res) => setNote(res.data))
@@ -39,21 +36,35 @@ export const notesApi = () => {
   }
 
   const updateNote = async (noteId: Number, note: NoteRequest) => {
-    await csrf()
     await axios
       .put('/api/notes/' + noteId, note)
       .catch((error) => setError(error))
   }
 
   const deleteNote = async (noteId: number) => {
-    // TODO: csrf works?
-    await csrf()
     await axios
       .delete('/api/notes/' + noteId)
-      .catch((error) => setError(error))
-      .then
       // TODO
-      ()
+      .then()
+      .catch((error) => setError(error))
+  }
+
+  const publishNote: (noteId: number) => Promise<string> = async (
+    noteId: number
+  ) => {
+    return await axios
+      .put('/api/notes/' + noteId + '/publish')
+      .then((res) => {
+        return res.data
+      })
+      .catch((error) => setError(error))
+  }
+
+  const unpublishNote = async (noteId: number) => {
+    await axios
+      .put('/api/notes/' + noteId + '/unpublish')
+      .then((res) => res)
+      .catch((error) => setError(error))
   }
 
   useEffect(() => {
@@ -68,6 +79,8 @@ export const notesApi = () => {
     fetchNote,
     fetchNotes,
     updateNote,
-    deleteNote
+    deleteNote,
+    publishNote,
+    unpublishNote
   }
 }
