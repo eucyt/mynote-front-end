@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useMemo } from 'react'
 import SimpleMde from 'react-simplemde-editor'
 import 'easymde/dist/easymde.min.css'
 import { notesApi } from '@/hooks/notesApi'
@@ -19,6 +19,27 @@ export const MarkdownEditor: React.VFC = () => {
   const [isPublsihed, setIsPublished] = useState(false)
   const [loading, setLoading] = useState(true)
   const { user } = useAuth({ middleware: 'auth' })
+  const SimpleMdeOptions = useMemo(() => {
+    return {
+      spellChecker: false,
+      toolbar: [
+        'bold',
+        'italic',
+        'strikethrough',
+        '|',
+        'heading',
+        'quote',
+        'code',
+        'unordered-list',
+        'ordered-list',
+        'link',
+        'table',
+        '|',
+        'undo',
+        'redo'
+      ]
+    }
+  }, [])
 
   // loading init note
   useEffect(() => {
@@ -116,6 +137,7 @@ export const MarkdownEditor: React.VFC = () => {
             setSaveMessage('')
             setBody(value)
           }}
+          options={SimpleMdeOptions}
         />
 
         <button
