@@ -6,6 +6,7 @@ import { useRouter } from 'next/router'
 import { NoteItem } from '@/types/NoteItem'
 import Loading from '@/components/Common/Loading'
 import { useAuth } from '@/hooks/auth'
+import { Options } from 'easymde'
 
 export const MarkdownEditor: React.VFC = () => {
   const [saveMessage, setSaveMessage] = useState('')
@@ -16,7 +17,7 @@ export const MarkdownEditor: React.VFC = () => {
   const [title, setTitle] = useState('')
   const [body, setBody] = useState('')
   const [publishedId, setPublishedId] = useState('')
-  const [isPublsihed, setIsPublished] = useState(false)
+  const [isPublished, setIsPublished] = useState(false)
   const [loading, setLoading] = useState(true)
   const { user } = useAuth({ middleware: 'auth' })
   const SimpleMdeOptions = useMemo(() => {
@@ -39,7 +40,7 @@ export const MarkdownEditor: React.VFC = () => {
         'redo'
       ]
     }
-  }, [])
+  }, []) as Options
 
   // loading init note
   useEffect(() => {
@@ -68,7 +69,7 @@ export const MarkdownEditor: React.VFC = () => {
   } else {
     return (
       <>
-        {user.is_publishable && isPublsihed && publishedId ? (
+        {user.is_publishable && isPublished && publishedId ? (
           <div className="ml-2">
             <a
               href={'/' + publishedId}
@@ -86,7 +87,7 @@ export const MarkdownEditor: React.VFC = () => {
             Title
           </label>
           {user.is_publishable ? (
-            isPublsihed ? (
+            isPublished ? (
               <button
                 className="px-2 py-1 absolute right-20 rounded transition duration-500 hover:bg-yellow-400 border border-yellow-400 bg-yellow-200"
                 onClick={() => {
