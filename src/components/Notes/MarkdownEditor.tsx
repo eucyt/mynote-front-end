@@ -50,6 +50,14 @@ export const MarkdownEditor: React.VFC = () => {
       router.push('/notes/' + router.query.id + '/preview')
     }
   }
+  const confirmPublish = () => {
+    if (confirm('公開しますか？')) {
+      publishNote(Number(router.query.id)).then((data) => {
+        setIsPublished(true)
+        setPublishedId(data)
+      })
+    }
+  }
 
   // loading init note
   useEffect(() => {
@@ -114,12 +122,7 @@ export const MarkdownEditor: React.VFC = () => {
             ) : (
               <button
                 className="px-2 py-1 absolute right-44 rounded transition duration-500 hover:bg-yellow-400 border border-yellow-400 bg-yellow-200"
-                onClick={() => {
-                  publishNote(Number(router.query.id)).then((data) => {
-                    setIsPublished(true)
-                    setPublishedId(data)
-                  })
-                }}>
+                onClick={confirmPublish}>
                 Publish
               </button>
             )
