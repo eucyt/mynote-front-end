@@ -100,9 +100,16 @@ export const MarkdownEditor: React.VFC = () => {
           ''
         )}
         <div className="relative h-10">
-          <label className="text-xl pl-2 absolute bottom-0 inline-block">
-            Title
-          </label>
+          <button
+            className="px-2 py-1 rounded transition duration-500 hover:bg-blue-400 border border-blue-200 bg-blue-100"
+            onClick={() => {
+              setSaveMessage('保存中です...')
+              updateNote(Number(router.query.id), { title, body }).then(() =>
+                setSaveMessage('保存しました!')
+              )
+            }}>
+            Save
+          </button>
           <button
             className="px-2 py-1 absolute right-20 rounded transition duration-500 hover:bg-gray-400 border border-gray-400 bg-gray-200"
             onClick={confirmPreview}>
@@ -141,6 +148,7 @@ export const MarkdownEditor: React.VFC = () => {
           </button>
         </div>
 
+        <label className="text-xl pl-2">Title</label>
         <input
           type="text"
           className="mb-6 w-full rounded border border-gray-200"
