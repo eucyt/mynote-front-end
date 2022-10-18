@@ -41,6 +41,15 @@ export const MarkdownEditor: React.VFC = () => {
       ]
     }
   }, []) as Options
+  const confirmPreview = () => {
+    if (
+      confirm(
+        '保存していないデータは消去されます。\n必ずSaveをしてからPreviewしてください。'
+      )
+    ) {
+      router.push('/notes/' + router.query.id + '/preview')
+    }
+  }
 
   // loading init note
   useEffect(() => {
@@ -86,10 +95,15 @@ export const MarkdownEditor: React.VFC = () => {
           <label className="text-xl pl-2 absolute bottom-0 inline-block">
             Title
           </label>
+          <button
+            className="px-2 py-1 absolute right-20 rounded transition duration-500 hover:bg-gray-400 border border-gray-400 bg-gray-200"
+            onClick={confirmPreview}>
+            Preview
+          </button>
           {user.is_publishable ? (
             isPublished ? (
               <button
-                className="px-2 py-1 absolute right-20 rounded transition duration-500 hover:bg-yellow-400 border border-yellow-400 bg-yellow-200"
+                className="px-2 py-1 absolute right-44 rounded transition duration-500 hover:bg-yellow-400 border border-yellow-400 bg-yellow-200"
                 onClick={() => {
                   unpublishNote(Number(router.query.id)).then(() => {
                     setIsPublished(false)
@@ -99,7 +113,7 @@ export const MarkdownEditor: React.VFC = () => {
               </button>
             ) : (
               <button
-                className="px-2 py-1 absolute right-20 rounded transition duration-500 hover:bg-yellow-400 border border-yellow-400 bg-yellow-200"
+                className="px-2 py-1 absolute right-44 rounded transition duration-500 hover:bg-yellow-400 border border-yellow-400 bg-yellow-200"
                 onClick={() => {
                   publishNote(Number(router.query.id)).then((data) => {
                     setIsPublished(true)
