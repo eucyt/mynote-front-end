@@ -7,6 +7,7 @@ import { NoteItem } from '@/types/NoteItem'
 import Loading from '@/components/Common/Loading'
 import { useAuth } from '@/hooks/auth'
 import { Options } from 'easymde'
+import Button from '@/components/Common/Button'
 
 export const MarkdownEditor: React.VFC = () => {
   const [saveMessage, setSaveMessage] = useState('')
@@ -59,6 +60,19 @@ export const MarkdownEditor: React.VFC = () => {
     }
   }
 
+  const saveBtn = (
+    <Button
+      designType="outline"
+      onClick={() => {
+        setSaveMessage('保存中です...')
+        updateNote(Number(router.query.id), { title, body }).then(() =>
+          setSaveMessage('保存しました!')
+        )
+      }}>
+      Save
+    </Button>
+  )
+
   // loading init note
   useEffect(() => {
     if (router.isReady) {
@@ -87,7 +101,7 @@ export const MarkdownEditor: React.VFC = () => {
     return (
       <>
         {user.is_publishable && isPublished && publishedId ? (
-          <div className="ml-2">
+          <div className="ml-2 mb-3">
             <a
               href={'/' + publishedId}
               target="_blank"
@@ -100,44 +114,31 @@ export const MarkdownEditor: React.VFC = () => {
           ''
         )}
         <div className="relative h-10">
-          <button
-            className="px-2 py-1 rounded transition duration-500 hover:bg-blue-400 border border-blue-200 bg-blue-100"
-            onClick={() => {
-              setSaveMessage('保存中です...')
-              updateNote(Number(router.query.id), { title, body }).then(() =>
-                setSaveMessage('保存しました!')
-              )
-            }}>
-            Save
-          </button>
-          <button
-            className="px-2 py-1 absolute right-20 rounded transition duration-500 hover:bg-gray-400 border border-gray-400 bg-gray-200"
-            onClick={confirmPreview}>
-            Preview
-          </button>
+          {saveBtn}
           {user.is_publishable ? (
             isPublished ? (
-              <button
-                className="px-2 py-1 absolute right-44 rounded transition duration-500 hover:bg-yellow-400 border border-yellow-400 bg-yellow-200"
+              <Button
+                className="absolute right-52"
                 onClick={() => {
                   unpublishNote(Number(router.query.id)).then(() => {
                     setIsPublished(false)
                   })
                 }}>
                 Unpublish
-              </button>
+              </Button>
             ) : (
-              <button
-                className="px-2 py-1 absolute right-44 rounded transition duration-500 hover:bg-yellow-400 border border-yellow-400 bg-yellow-200"
-                onClick={confirmPublish}>
+              <Button className="absolute right-52" onClick={confirmPublish}>
                 Publish
-              </button>
+              </Button>
             )
           ) : (
             ''
           )}
-          <button
-            className="px-2 py-1 absolute right-0 rounded transition duration-500 hover:bg-red-400 border border-red-200 bg-red-100"
+          <Button className="absolute right-24" onClick={confirmPreview}>
+            Preview
+          </Button>
+          <Button
+            className="absolute right-0"
             onClick={() => {
               setLoading(true)
               deleteNote(Number(router.query.id)).then(() => {
@@ -145,7 +146,7 @@ export const MarkdownEditor: React.VFC = () => {
               })
             }}>
             Delete
-          </button>
+          </Button>
         </div>
 
         <label className="text-xl pl-2">Title</label>
@@ -166,16 +167,7 @@ export const MarkdownEditor: React.VFC = () => {
           options={SimpleMdeOptions}
         />
 
-        <button
-          className="px-2 py-1 rounded transition duration-500 hover:bg-blue-400 border border-blue-200 bg-blue-100"
-          onClick={() => {
-            setSaveMessage('保存中です...')
-            updateNote(Number(router.query.id), { title, body }).then(() =>
-              setSaveMessage('保存しました!')
-            )
-          }}>
-          Save
-        </button>
+        {saveBtn}
         <p className="mt-2">{saveMessage}</p>
       </>
     )

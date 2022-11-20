@@ -28,7 +28,7 @@ const AuthenticatedLayout: React.VFC<Props> = (props) => {
         <Head>
           <meta name="robots" content="noindex,nofollow" />
         </Head>
-        <div className="min-h-screen bg-gray-100">
+        <div className="min-h-screen bg-gray-100 font-sans">
           <Navigation user={user} setLoading={setLoading} />
 
           {/* Page Content */}

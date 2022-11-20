@@ -7,6 +7,7 @@ import { notesApi } from '@/hooks/notesApi'
 import { useRouter } from 'next/router'
 import Loading from '@/components/Common/Loading'
 import Link from 'next/link'
+import Button from '@/components/Common/Button'
 
 const Note = () => {
   const [note, setNote] = useState<NoteItem>()
@@ -34,9 +35,7 @@ const Note = () => {
 
         <div className="flex justify-center ">
           <Link href={'/notes/' + router.query.id}>
-            <button className="mt-12 px-3 py-2 rounded transition duration-500 hover:bg-gray-400 border border-gray-400 bg-gray-200">
-              Back to Edit Screen
-            </button>
+            <Button className="mt-12"> Back to Edit Screen</Button>
           </Link>
         </div>
 
